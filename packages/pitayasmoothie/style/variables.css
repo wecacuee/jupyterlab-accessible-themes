@@ -314,7 +314,7 @@ smoothie main theme, https://github.com/trallard/pitaya_smoothie.
   --jp-cell-prompt-font-family: "Source Code Pro", monospace;
   --jp-cell-prompt-letter-spacing: 0px;
   --jp-cell-prompt-opacity: 1;
-  --jp-cell-prompt-not-active-opacity: 0.5;
+  --jp-cell-prompt-not-active-opacity: 0.9;
   --jp-cell-inprompt-font-color: var(--pitaya-lilac500);
   --jp-cell-prompt-not-active-font-color: var(--pitaya-periwinkle-extra);
   --jp-cell-outprompt-font-color: var(--pitaya-teal500);

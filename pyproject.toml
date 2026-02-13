@@ -1,13 +1,28 @@
 [build-system]
-requires = ["jupyter_packaging~=0.10,<2", "jupyterlab~=3.1"]
-build-backend = "jupyter_packaging.build_api"
+requires = ["hatchling>=1.5.0", "jupyterlab>=4.0.0,<5", "hatch-jupyter-builder>=0.8.1"]
+build-backend = "hatchling.build"
 
 [project]
 name = "jupyterlab_accessible_themes"
 requires-python = ">=3.8"
-dynamic = ["version", "description", "readme", "license", "authors", "urls"]
+dynamic = ["version", "description"]
+license = {text = "BSD-3-Clause"}
 
-[tool.jupyter-packaging.options]
+[tool.hatch.version]
+path = "package.json"
+pattern = "\"version\":\\s*\"(?P<version>[^\"]+)\""
+
+[tool.hatch.build.targets.sdist]
+exclude = [".github"]
+
+[tool.hatch.build.targets.wheel.shared-data]
+"jupyterlab_accessible_themes/labextensions/githublight" = "share/jupyter/labextensions/@jupyterlab-accessible-themes/jupyterlab-theme-githublight"
+"jupyterlab_accessible_themes/labextensions/githubdark" = "share/jupyter/labextensions/@jupyterlab-accessible-themes/jupyterlab-theme-githubdark"
+"jupyterlab_accessible_themes/labextensions/pitayasmoothie" = "share/jupyter/labextensions/@jupyterlab-accessible-themes/jupyterlab-theme-pitayasmoothie"
+
+[tool.hatch.build.hooks.jupyter-builder]
+dependencies = ["hatch-jupyter-builder>=0.8.1"]
+build-function = "hatch_jupyter_builder.npm_builder"
 ensured-targets = [
     "jupyterlab_accessible_themes/labextensions/githubdark/static/style.js",
     "jupyterlab_accessible_themes/labextensions/githubdark/package.json",
@@ -17,10 +32,7 @@ ensured-targets = [
     "jupyterlab_accessible_themes/labextensions/pitayasmoothie/package.json"
 ]
 
-[tool.jupyter-packaging.builder]
-factory = "jupyter_packaging.npm_builder"
-
-[tool.jupyter-packaging.build-args]
+[tool.hatch.build.hooks.jupyter-builder.build-kwargs]
 build_cmd = "build"
 npm = ["jlpm"]
 
