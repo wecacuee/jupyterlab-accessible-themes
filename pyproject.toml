@@ -15,6 +15,11 @@ pattern = "\"version\":\\s*\"(?P<version>[^\"]+)\""
 [tool.hatch.build.targets.sdist]
 exclude = [".github"]
 
+[tool.hatch.build.targets.wheel]
+artifacts = [
+    "jupyterlab_accessible_themes/labextensions"
+]
+
 [tool.hatch.build.targets.wheel.shared-data]
 "jupyterlab_accessible_themes/labextensions/githublight" = "share/jupyter/labextensions/@jupyterlab-accessible-themes/jupyterlab-theme-githublight"
 "jupyterlab_accessible_themes/labextensions/githubdark" = "share/jupyter/labextensions/@jupyterlab-accessible-themes/jupyterlab-theme-githubdark"
